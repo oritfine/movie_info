@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:movie_info/movie_cell.dart';
 import 'package:movie_info/route_generator.dart';
+import 'package:http/http.dart' as http;
+import 'dart:math';
 
 void main() {
   runApp(MyApp()); //runApp
@@ -20,6 +23,8 @@ class HomePage extends StatelessWidget {
   @override
   Color background = Color(0xffeff1f3);
   Color titles = Color(0xff6C9FE5);
+  Random random = new Random();
+
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: background,
@@ -47,7 +52,7 @@ class HomePage extends StatelessWidget {
               onTap: () {
                 Navigator.of(context).pushNamed(
                   '/moviePage',
-                  arguments: 'Yanir',
+                  arguments: random.nextInt(100).toString(),
                 );
                 // Navigator.push(
                 //   context,
@@ -61,10 +66,13 @@ class HomePage extends StatelessWidget {
                 color: Colors.teal[100],
               ),
             ),
-            Container(
-              padding: const EdgeInsets.all(8),
-              child: const Text('movie name 2'),
-              color: Colors.teal[200],
+            InkWell(
+              onTap: () async {},
+              child: Container(
+                padding: const EdgeInsets.all(8),
+                child: const Text('movie name 2'),
+                color: Colors.teal[200],
+              ),
             ),
             Container(
               padding: const EdgeInsets.all(8),
