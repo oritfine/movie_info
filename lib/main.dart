@@ -4,7 +4,7 @@ import 'package:movie_info/route_generator.dart';
 import 'package:http/http.dart' as http;
 import 'dart:math';
 
-import 'movie_page.dart';
+import 'Designs/home_page_design.dart';
 
 void main() {
   runApp(MyApp()); //runApp
@@ -73,7 +73,6 @@ class HomePage extends StatefulWidget {
   @override
   Color background = Color(0xffeff1f3);
   Color titles = Color(0xff6C9FE5);
-  Random random = Random();
 
   HomePage();
 
@@ -135,94 +134,6 @@ class HomePage extends StatefulWidget {
   }
 }
 
-class HomePageDesign extends StatelessWidget {
-  Color background = Color(0xffeff1f3);
-  Color titles = Color(0xff6C9FE5);
-  Random random = Random();
-
-  BasicMovieCellList _movieList;
-
-  HomePageDesign(
-    this._movieList,
-  );
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: background,
-        appBar: AppBar(
-//  leading: Icon(Icons.menu),
-          title: const Text('Movie Info'),
-          actions: [
-            Icon(Icons.favorite),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 30),
-              child: Icon(Icons.search),
-            ),
-//    Icon(Icons.more_vert),
-          ],
-          backgroundColor: titles,
-        ),
-        body: GridView.count(
-          primary: false,
-          padding: const EdgeInsets.all(20),
-          crossAxisSpacing: 10,
-          mainAxisSpacing: 10,
-          crossAxisCount: 2,
-          children: <Widget>[
-            InkWell(
-              onTap: () {
-                Navigator.of(context).pushNamed('/moviePage',
-                    arguments: MoviePageArgs(
-                      _movieList.list[0].id.toString(),
-                      _movieList.list[0].title,
-                    ));
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(builder: (context) => moviePage()),
-                // );
-                print("hi!");
-              },
-              child: Container(
-                padding: const EdgeInsets.all(8),
-                child: Text(_movieList.list[0].title),
-                color: Colors.teal[100],
-              ),
-            ),
-            InkWell(
-              onTap: () async {},
-              child: Container(
-                padding: const EdgeInsets.all(8),
-                child: const Text('movie name 2'),
-                color: Colors.teal[200],
-              ),
-            ),
-            Container(
-              padding: const EdgeInsets.all(8),
-              child: const Text('movie name 3'),
-              color: Colors.teal[300],
-            ),
-            Container(
-              padding: const EdgeInsets.all(8),
-              child: const Text('movie name 4'),
-              color: Colors.teal[400],
-            ),
-            Container(
-              padding: const EdgeInsets.all(8),
-              child: const Text('movie name 5'),
-              color: Colors.teal[500],
-            ),
-            Container(
-              padding: const EdgeInsets.all(8),
-              child: const Text('movie name 6'),
-              color: Colors.teal[600],
-            ),
-          ],
-        ));
-    // debugShowCheckedModeBanner: false,
-    // );
-  }
-}
 // class MyApp extends StatelessWidget {
 //   const MyApp({Key? key}) : super(key: key);
 //

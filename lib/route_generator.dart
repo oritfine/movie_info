@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'Designs/movie_page_design.dart';
 import 'main.dart';
 import 'movie_page.dart';
 
@@ -13,7 +13,6 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => HomePage());
       case '/moviePage':
         if (args is MoviePageArgs) {
-          //Object? params = args;
           return MaterialPageRoute(
             builder: (_) => MoviePage(
               data: args,
