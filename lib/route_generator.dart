@@ -12,7 +12,8 @@ class RouteGenerator {
       case '/':
         return MaterialPageRoute(builder: (_) => HomePage());
       case '/moviePage':
-        if (args is String) {
+        if (args is MoviePageArgs) {
+          //Object? params = args;
           return MaterialPageRoute(
             builder: (_) => MoviePage(
               data: args,
@@ -29,7 +30,7 @@ class RouteGenerator {
     return MaterialPageRoute(builder: (_) {
       return Scaffold(
         appBar: AppBar(
-          title: Text("Error"),
+          title: const Text("Error"),
         ),
         body: Center(
           child: Text('ERROR'),

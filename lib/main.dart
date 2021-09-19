@@ -4,6 +4,8 @@ import 'package:movie_info/route_generator.dart';
 import 'package:http/http.dart' as http;
 import 'dart:math';
 
+import 'movie_page.dart';
+
 void main() {
   runApp(MyApp()); //runApp
 }
@@ -19,12 +21,132 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class HomePage extends StatelessWidget {
+class _HomeState extends State<HomePage> {
+  late Future<BasicMovieCellList> futureBasicMovieCellList;
+  String requestType = 'popular';
+
+  //void set data => _list;
+  //TODO set for changing type of request
+  _HomeState();
+
+  @override
+  void initState() {
+    super.initState();
+    futureBasicMovieCellList = fetchBasicMovieCellList(requestType);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: FutureBuilder<BasicMovieCellList>(
+            future: futureBasicMovieCellList,
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return HomePageDesign(snapshot.data!);
+                //BasicMovieCellList? data = snapshot.data;
+                //TODO function to create the list from data
+                //   BasicMovieCellList data = snapshot.data;
+                //   return ListView.builder(
+                //       itemCount: data!.length,
+                //       itemBuilder: (BuildContext context, int index) {
+                //         return Container(
+                //           height: 75,
+                //           color: Colors.white,
+                //           child: Center(
+                //             child: Text(data![index].title),
+                //           ),
+                //         );
+                //       });
+              } else if (snapshot.hasError) {
+                return Text("${snapshot.error}");
+              }
+              return const CircularProgressIndicator();
+              //throw UnimplementedError();
+            }),
+      ),
+    );
+  }
+}
+
+class HomePage extends StatefulWidget {
   @override
   Color background = Color(0xffeff1f3);
   Color titles = Color(0xff6C9FE5);
-  Random random = new Random();
+  Random random = Random();
 
+  HomePage();
+
+  /* Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("movie"),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          // children: <Widget>[
+          //   const Text(
+          //     'You have pushed the button this many times:',
+          //   ),
+          //   Text(
+          //     '$_counter',
+          //     style: Theme.of(context).textTheme.headline4,
+          //   ),
+          // ],
+        ),
+      ),
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: _incrementCounter,
+      //   tooltip: 'Increment',
+      //   child: const Icon(Icons.add),
+      // ),  This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }*/
+
+  @override
+  _HomeState createState() => _HomeState();
+
+  Widget build(BuildContext context) {
+    return Scaffold(
+        backgroundColor: background,
+        appBar: AppBar(
+//  leading: Icon(Icons.menu),
+          title: const Text('Movie Info'),
+          actions: [
+            Icon(Icons.favorite),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 30),
+              child: Icon(Icons.search),
+            ),
+//    Icon(Icons.more_vert),
+          ],
+          backgroundColor: titles,
+        ),
+        body: GridView.count(
+          primary: false,
+          padding: const EdgeInsets.all(20),
+          crossAxisSpacing: 10,
+          mainAxisSpacing: 10,
+          crossAxisCount: 2,
+        ));
+    // debugShowCheckedModeBanner: false,
+    // );
+  }
+}
+
+class HomePageDesign extends StatelessWidget {
+  Color background = Color(0xffeff1f3);
+  Color titles = Color(0xff6C9FE5);
+  Random random = Random();
+
+  BasicMovieCellList _movieList;
+
+  HomePageDesign(
+    this._movieList,
+  );
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: background,
@@ -50,10 +172,11 @@ class HomePage extends StatelessWidget {
           children: <Widget>[
             InkWell(
               onTap: () {
-                Navigator.of(context).pushNamed(
-                  '/moviePage',
-                  arguments: random.nextInt(100).toString(),
-                );
+                Navigator.of(context).pushNamed('/moviePage',
+                    arguments: MoviePageArgs(
+                      _movieList.list[0].id.toString(),
+                      _movieList.list[0].title,
+                    ));
                 // Navigator.push(
                 //   context,
                 //   MaterialPageRoute(builder: (context) => moviePage()),
@@ -62,7 +185,7 @@ class HomePage extends StatelessWidget {
               },
               child: Container(
                 padding: const EdgeInsets.all(8),
-                child: const Text("movie name 1"),
+                child: Text(_movieList.list[0].title),
                 color: Colors.teal[100],
               ),
             ),
@@ -100,7 +223,6 @@ class HomePage extends StatelessWidget {
     // );
   }
 }
-
 // class MyApp extends StatelessWidget {
 //   const MyApp({Key? key}) : super(key: key);
 //

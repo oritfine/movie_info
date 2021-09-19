@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:movie_info/movie_cell.dart';
 
 class MoviePage extends StatefulWidget {
-  final String data;
+  final MoviePageArgs data;
 
   MoviePage({required this.data});
   /* Widget build(BuildContext context) {
@@ -39,14 +39,14 @@ class MoviePage extends StatefulWidget {
 
 class _MyAppState extends State<MoviePage> {
   late Future<MovieCell> futureMovieCell;
-  String data;
-  _MyAppState(this.data);
+  MoviePageArgs _args;
+  _MyAppState(this._args);
 
   @override
   void initState() {
     super.initState();
 
-    futureMovieCell = fetchMovieCell(data);
+    futureMovieCell = fetchMovieCell(_args.id);
   }
 
   @override
@@ -62,7 +62,7 @@ class _MyAppState extends State<MoviePage> {
             icon: Icon(Icons.arrow_back),
             onPressed: () => Navigator.of(context).pop(),
           ),
-          title: const Text('Fetch Data Example'),
+          title: Text(_args.title),
         ),
         body: Center(
           child: FutureBuilder<MovieCell>(
@@ -163,4 +163,13 @@ class MovieDataDesign extends StatelessWidget {
     );
     //TODO throw UnimplementedError();
   }
+}
+
+class MoviePageArgs {
+  final String _id;
+  final String _title;
+
+  MoviePageArgs(this._id, this._title);
+  String get id => _id;
+  String get title => _title;
 }
