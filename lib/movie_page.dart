@@ -4,8 +4,8 @@ import 'package:movie_info/movie_cell.dart';
 
 class MoviePage extends StatefulWidget {
   final String data;
+
   MoviePage({required this.data});
-  @override
   /* Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -34,17 +34,19 @@ class MoviePage extends StatefulWidget {
   }*/
 
   @override
-  _MyAppState createState() => _MyAppState();
+  _MyAppState createState() => _MyAppState(this.data);
 }
 
 class _MyAppState extends State<MoviePage> {
   late Future<MovieCell> futureMovieCell;
+  String data;
+  _MyAppState(this.data);
 
   @override
   void initState() {
     super.initState();
 
-    futureMovieCell = fetchMovieCell('500');
+    futureMovieCell = fetchMovieCell(data);
   }
 
   @override
@@ -56,6 +58,10 @@ class _MyAppState extends State<MoviePage> {
       ),
       home: Scaffold(
         appBar: AppBar(
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () => Navigator.of(context).pop(),
+          ),
           title: const Text('Fetch Data Example'),
         ),
         body: Center(
@@ -63,8 +69,8 @@ class _MyAppState extends State<MoviePage> {
             future: futureMovieCell,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                return Text(snapshot.data!.title);
-                //TODO to return designed object
+                return MovieDataDesign(snapshot.data!);
+                //return Text(snapshot.data!.title);
               } else if (snapshot.hasError) {
                 return Text('${snapshot.error}');
               }
@@ -75,5 +81,86 @@ class _MyAppState extends State<MoviePage> {
         ),
       ),
     );
+  }
+}
+
+class MovieDataDesign extends StatelessWidget {
+  late final MovieCell dataCell;
+  MovieDataDesign(MovieCell this.dataCell);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Center(
+        child: Container(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Column(
+                    children: [
+                      const Text(
+                        'Release Date:',
+                        style: TextStyle(
+                          fontSize: 15,
+                        ),
+                        textAlign: TextAlign.start,
+                      ),
+                      Text(
+                        dataCell.release_date,
+                        style: const TextStyle(
+                          fontSize: 15,
+                        ),
+                        textAlign: TextAlign.start,
+                      ),
+                      const Text(
+                        'Runtime:',
+                        style: TextStyle(
+                          fontSize: 15,
+                        ),
+                        textAlign: TextAlign.start,
+                      ),
+                      Text(
+                        dataCell.runtime.toString() + ' minutes',
+                        style: const TextStyle(
+                          fontSize: 15,
+                        ),
+                        textAlign: TextAlign.start,
+                      ),
+                    ],
+                  ),
+                  Column(
+                    children: [
+                      Image.network(
+                        'https://image.tmdb.org/t/p/original/' +
+                            dataCell.poster_path,
+                        fit: BoxFit.fitHeight,
+                        height: 300,
+                        width: 220,
+                        alignment: Alignment.center,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              Row(
+                children: const [
+                  Text(
+                    'Description:',
+                    style: TextStyle(
+                      fontSize: 15,
+                    ),
+                    textAlign: TextAlign.start,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+    //TODO throw UnimplementedError();
   }
 }
