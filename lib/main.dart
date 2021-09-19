@@ -44,9 +44,8 @@ class _HomeState extends State<HomePage> {
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return HomePageDesign(snapshot.data!);
-                //BasicMovieCellList? data = snapshot.data;
                 //TODO function to create the list from data
-                //   BasicMovieCellList data = snapshot.data;
+                /*   BasicMovieCellList data = snapshot.data;
                 //   return ListView.builder(
                 //       itemCount: data!.length,
                 //       itemBuilder: (BuildContext context, int index) {
@@ -57,7 +56,7 @@ class _HomeState extends State<HomePage> {
                 //             child: Text(data![index].title),
                 //           ),
                 //         );
-                //       });
+                //       });*/
               } else if (snapshot.hasError) {
                 return Text("${snapshot.error}");
               }
