@@ -69,7 +69,7 @@ class MovieDataDesign extends StatelessWidget {
                       ),
                       SizedBox(height: 10),
                       Text(
-                        'Popularity:',
+                        'Vote Average:',
                         style: GoogleFonts.josefinSans(
                             fontWeight: FontWeight.w900,
                             fontSize: 22,
@@ -78,7 +78,7 @@ class MovieDataDesign extends StatelessWidget {
                       ),
                       SizedBox(height: 5),
                       Text(
-                        dataCell.popularity.toString(),
+                        dataCell.vote_average.toString(),
                         style: GoogleFonts.josefinSans(
                           fontWeight: FontWeight.w600,
                           fontSize: 20,
@@ -131,6 +131,26 @@ class MovieDataDesign extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                           textAlign: TextAlign.start,
                           maxLines: 10,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 30),
+                  Row(
+                    children: [
+                      Flexible(
+                        child: Center(
+                          child: Text(
+                            dataCell.tagline,
+                            textAlign: TextAlign.center,
+                            style: GoogleFonts.josefinSans(
+                              fontWeight: FontWeight.w800,
+                              fontSize: 27,
+                              color: Colors.black,
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 10,
+                          ),
                         ),
                       ),
                     ],

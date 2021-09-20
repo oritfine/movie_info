@@ -8,21 +8,22 @@ class MovieCell {
   final String poster_path;
   final String release_date;
   final String overview;
-  final double popularity;
+  final double vote_average;
+  final String tagline;
 
-  MovieCell(
-    this.runtime,
-    this.poster_path,
-    this.release_date,
-    this.id,
-    this.title,
-    this.overview,
-    this.popularity,
-  );
+  MovieCell(this.runtime, this.poster_path, this.release_date, this.id,
+      this.title, this.overview, this.vote_average, this.tagline);
 
   factory MovieCell.fromJson(Map<String, dynamic> json) {
-    return MovieCell(json['runtime'], json['poster_path'], json['release_date'],
-        json['id'], json['title'], json['overview'], json['popularity']);
+    return MovieCell(
+        json['runtime'],
+        json['poster_path'],
+        json['release_date'],
+        json['id'],
+        json['title'],
+        json['overview'],
+        json['vote_average'],
+        json['tagline']);
   }
 }
 

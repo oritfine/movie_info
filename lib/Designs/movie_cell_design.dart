@@ -23,10 +23,11 @@ class MovieCellDesign extends StatelessWidget {
       child: Container(
           decoration: BoxDecoration(
             color: Color(0xff606060),
-            border: Border.all(
-              color: Color(0xff124559),
-              width: 4,
-            ),
+            borderRadius: BorderRadius.all(Radius.circular(15)),
+            // border: Border.all(
+            //   color: Color(0xff124559),
+            //   width: 4,
+            // ),
           ),
           child: Column(
             children: [
