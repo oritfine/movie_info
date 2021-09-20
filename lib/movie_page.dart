@@ -2,40 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_info/movie_cell.dart';
-
 import 'Designs/movie_page_design.dart';
 
 class MoviePage extends StatefulWidget {
   final MoviePageArgs data;
 
   MoviePage({required this.data});
-
-  /* Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("movie"),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          // children: <Widget>[
-          //   const Text(
-          //     'You have pushed the button this many times:',
-          //   ),
-          //   Text(
-          //     '$_counter',
-          //     style: Theme.of(context).textTheme.headline4,
-          //   ),
-          // ],
-        ),
-      ),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: _incrementCounter,
-      //   tooltip: 'Increment',
-      //   child: const Icon(Icons.add),
-      // ),  This trailing comma makes auto-formatting nicer for build methods.
-    );
-  }*/
 
   @override
   _MyAppState createState() => _MyAppState(this.data);

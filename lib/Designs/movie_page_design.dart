@@ -5,7 +5,6 @@ import 'package:google_fonts/google_fonts.dart';
 import '../movie_cell.dart';
 
 class MovieDataDesign extends StatelessWidget {
-  //Color background = Colors.grey.shade300;
   Color background = Color(0xffC9CDD3);
   Color titles = Color(0xff124559);
   late final MovieCell dataCell;
@@ -37,10 +36,6 @@ class MovieDataDesign extends StatelessWidget {
                       SizedBox(height: 5),
                       Text(
                         dataCell.release_date,
-                        // style: TextStyle(
-                        //   fontSize: 15,
-                        // ),
-                        //style: Theme.of(context).textTheme.subtitle1,
                         style: GoogleFonts.josefinSans(
                           fontWeight: FontWeight.w600,
                           fontSize: 20,
@@ -60,7 +55,6 @@ class MovieDataDesign extends StatelessWidget {
                       SizedBox(height: 5),
                       Text(
                         dataCell.runtime.toString() + ' minutes',
-                        // style: Theme.of(context).textTheme.bodyText1,
                         style: GoogleFonts.josefinSans(
                             fontWeight: FontWeight.w600,
                             fontSize: 22,

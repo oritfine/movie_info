@@ -45,7 +45,6 @@ class MovieCellDesign extends StatelessWidget {
                 'https://image.tmdb.org/t/p/original/' + dataCell.poster_path,
                 fit: BoxFit.fitHeight,
                 height: 215,
-                //  width: 200,
                 alignment: Alignment.center,
               ),
             ],
