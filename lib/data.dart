@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Data extends ChangeNotifier {
-  int index = 0;
+  int index = 1;
 
   setIndex(int val) {
     index = val;
