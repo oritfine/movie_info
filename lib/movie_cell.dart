@@ -7,6 +7,8 @@ class MovieCell {
   final int runtime;
   final String poster_path;
   final String release_date;
+  final String overview;
+  final double popularity;
 
   MovieCell(
     this.runtime,
@@ -14,11 +16,13 @@ class MovieCell {
     this.release_date,
     this.id,
     this.title,
+    this.overview,
+    this.popularity,
   );
 
   factory MovieCell.fromJson(Map<String, dynamic> json) {
     return MovieCell(json['runtime'], json['poster_path'], json['release_date'],
-        json['id'], json['title']);
+        json['id'], json['title'], json['overview'], json['popularity']);
   }
 }
 
@@ -51,7 +55,11 @@ class BasicMovieCell {
   );
 
   factory BasicMovieCell.fromJson(Map<String, dynamic> json) {
-    return BasicMovieCell(json['poster_path'], json['id'], json['title']);
+    return BasicMovieCell(
+      json['poster_path'],
+      json['id'],
+      json['title'],
+    );
   }
 }
 

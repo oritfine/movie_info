@@ -70,7 +70,8 @@ class _HomeState extends State<HomePage> {
 
 class HomePage extends StatefulWidget {
   @override
-  Color background = Color(0xffeff1f3);
+  //Color background = Color(0xffeff1f3);
+  Color background = Colors.black12;
   Color titles = Color(0xff6C9FE5);
 
   HomePage();
@@ -110,7 +111,8 @@ class HomePage extends StatefulWidget {
         backgroundColor: background,
         appBar: AppBar(
 //  leading: Icon(Icons.menu),
-          title: const Text('Movie Info'),
+
+          title: const Text('Movies Info'),
           actions: [
             Icon(Icons.favorite),
             Padding(
@@ -123,8 +125,8 @@ class HomePage extends StatefulWidget {
         ),
         body: GridView.count(
           primary: false,
-          padding: const EdgeInsets.all(20),
-          crossAxisSpacing: 10,
+          padding: const EdgeInsets.all(400),
+          crossAxisSpacing: 100,
           mainAxisSpacing: 10,
           crossAxisCount: 2,
         ));
