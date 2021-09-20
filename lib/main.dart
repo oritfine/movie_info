@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:movie_info/movie_cell.dart';
 import 'package:movie_info/route_generator.dart';
-import 'package:http/http.dart' as http;
-import 'dart:math';
+import 'package:provider/provider.dart';
 
 import 'Designs/home_page_design.dart';
+import 'data.dart';
 
 void main() {
-  runApp(MyApp()); //runApp
+  runApp(MultiProvider(
+    providers: [ChangeNotifierProvider(create: (_) => Data())],
+    child: MyApp(),
+  )); //runApp
 }
 
 class MyApp extends StatelessWidget {
@@ -22,29 +25,29 @@ class MyApp extends StatelessWidget {
 }
 
 class _HomeState extends State<HomePage> {
-  late Future<BasicMovieCellList> futureBasicMovieCellList;
-  String requestType = 'popular';
+  late List<Future<BasicMovieCellList>> futureBasicMovieCellList = [];
 
-  //void set data => _list;
-  //TODO set for changing type of request
   _HomeState();
 
   @override
   void initState() {
     super.initState();
-    futureBasicMovieCellList = fetchBasicMovieCellList(requestType);
+    futureBasicMovieCellList.add(fetchBasicMovieCellList('top_rated'));
+    futureBasicMovieCellList.add(fetchBasicMovieCellList('popular'));
+    futureBasicMovieCellList.add(fetchBasicMovieCellList('now_playing'));
+    futureBasicMovieCellList.add(fetchBasicMovieCellList('upcoming'));
   }
 
   @override
   Widget build(BuildContext context) {
+    Data provider = Provider.of<Data>(context);
     return Scaffold(
       body: Center(
         child: FutureBuilder<BasicMovieCellList>(
-            future: futureBasicMovieCellList,
+            future: futureBasicMovieCellList[provider.index],
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return HomePageDesign(snapshot.data!);
-                //TODO function to create the list from data
                 /*   BasicMovieCellList data = snapshot.data;
                 //   return ListView.builder(
                 //       itemCount: data!.length,

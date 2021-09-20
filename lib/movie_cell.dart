@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:http/http.dart' as http;
 
 class MovieCell {
@@ -87,6 +88,7 @@ class BasicMovieCellList {
   BasicMovieCellList(
     this._list,
   );
+
   List<BasicMovieCell> get list => _list;
 
   factory BasicMovieCellList.fromJson(Map<String, dynamic> json) {

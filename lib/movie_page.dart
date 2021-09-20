@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_info/movie_cell.dart';
+
 import 'Designs/movie_page_design.dart';
 
 class MoviePage extends StatefulWidget {
